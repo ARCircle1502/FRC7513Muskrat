@@ -12,7 +12,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.TestChassisSubsystem;
+import frc.robot.commands.ChassisManualDrive;
+import frc.robot.subsystems.CargoLiftSubsystem;
+import frc.robot.subsystems.ChassisSubsystem;
+import frc.robot.subsystems.PanelSubsystem;
+//import frc.robot.subsystems.TestChassisSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,23 +26,39 @@ import frc.robot.subsystems.TestChassisSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static OI m_oi;
-  public static TestChassisSubsystem chassisSubsystem;
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+	public static ChassisSubsystem mChassisubsystem;
+	public static PanelSubsystem m_PanelSubsystem;
+	public static CargoLiftSubsystem m_CargoLiftSubsystem;
 
-  /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
-   */
-  @Override
-  public void robotInit() {
-    m_oi = new OI();
-    chassisSubsystem=new TestChassisSubsystem();
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+	//public static VisionSubsystem m_VisionSubsystem;
+	public static OI m_oi;
+	//CameraServer Camera;
+	Command m_autonomousCommand;
+	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	public String autoSelected;
+
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	@Override
+	public void robotInit() {
+		mChassisubsystem = new ChassisSubsystem();
+		m_CargoLiftSubsystem = new CargoLiftSubsystem();
+		m_PanelSubsystem = new PanelSubsystem();
+
+		m_oi = new OI();
+    m_chooser.addDefault("Default Auto", new ChassisManualDrive());
+		SmartDashboard.putData("Auto mode", m_chooser);
+		/*Camera = CameraServer.getInstance();
+			Camera.getVideo();
+			Camera.startAutomaticCapture();*/
+	}
+
+  public void log(){
+    mChassisubsystem.log();
+    SmartDashboard.updateValues();
   }
-
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
@@ -99,6 +119,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    //log();
   }
 
   @Override
@@ -118,6 +139,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    log();
   }
 
   /**
@@ -125,5 +147,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    log();
   }
 }

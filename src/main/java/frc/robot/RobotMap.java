@@ -23,8 +23,25 @@ public class RobotMap {
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
+  public static double WheelDiameter=15.24;//cm
+  public static double ChassisEncoderCPR=42.0;//42 Counts Per Rev
+  public static double ChassisGearRatio=0.0933706816059757;//AndyMark Toughbox Mini 
+  //                                                           Reduction Ratio 10.71:1   
+
   public static int LeftFrontVictorID=2;
   public static int LeftBackVictorID=3;
+  public static int LeftBackSparkMAXID=3;
   public static int RightFrontVictorID=4;
   public static int RightBackVictorID=5;
+  public static int RightBackSparkMAXID=5;
+  public static int PanelVictorID=1;
+
+  public static double ChassisLeft_P=0.00052;
+  public static double ChassisLeft_I=0.0;
+  public static double ChassisLeft_D=0.00155;
+  public static double ChassisRight_P=0.00052;
+  public static double ChassisRight_I=0.0;
+  public static double ChassisRight_D=0.00155;
+
+  public static double MaxChassisWheelRPM=400.0;//MAX Output Shaft RPM
 }

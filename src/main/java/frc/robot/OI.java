@@ -19,25 +19,18 @@ public class OI {
   public OI(){
     joystick=new Joystick(0);
   };
-  public Joystick getJoystick(){
-    return joystick;
-  }
   public double getLeftXAxis() {
-    return joystick.getX(Hand.kLeft);
+    return -joystick.getRawAxis(0);
   }
   public double getLeftYAxis() {
-    return joystick.getY(Hand.kLeft);
+    return -joystick.getRawAxis(1);
   }
   public double getRightXAxis() {
-    return joystick.getX(Hand.kRight);
+    return -joystick.getRawAxis(4);
   }
   public double getRightYAxis() {
-    return joystick.getY(Hand.kRight);
+    return -joystick.getRawAxis(5);
   }
-  public double getThrottle(){
-    return joystick.getThrottle();
-  }
-
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
